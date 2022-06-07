@@ -48,69 +48,67 @@
                 </div>
 
                 <div class="column is-3">
-                    <form class="box">
 
-                        <div class="tabs is-centered">
-                            <ul>
-                                <li class="is-active">
-                                    <a>
-                                        <span class="icon is-small">
-                                            <i class="fas fa-lock" aria-hidden="true"></i>
-                                        </span>
-                                        <span>Enkripsi</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <span class="icon is-small">
-                                            <i class="fas fa-lock-open" aria-hidden="true"></i>
-                                        </span>
-                                        <span>Dekripsi</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="tabs is-centered">
+                        <ul>
+                            <li class="is-active">
+                                <a>
+                                    <span class="icon is-small">
+                                        <i class="fas fa-lock" aria-hidden="true"></i>
+                                    </span>
+                                    <span>Enkripsi</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <span class="icon is-small">
+                                        <i class="fas fa-lock-open" aria-hidden="true"></i>
+                                    </span>
+                                    <span>Dekripsi</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
 
-                        <div class="field">
-                            <label class="label">Jenis</label>
-                            <div class="control">
-                                <div class="select">
-                                    <select disabled>
-                                        <option>Vigenere Cipher standard</option>
-                                        <option>Vigenere Cipher extended</option>
-                                        <option>Vigenere modifikasi</option>
-                                    </select>
-                                </div>
+                    <div class="field">
+                        <label class="label">Jenis</label>
+                        <div class="control">
+                            <div class="select">
+                                <select disabled>
+                                    <option>Vigenere Cipher standard</option>
+                                    <option>Vigenere Cipher extended</option>
+                                    <option>Vigenere modifikasi</option>
+                                </select>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="field">
-                            <label class="label">Kunci</label>
-                            <div class="control has-icons-left has-icons-right">
-                                <input class="input" id="key" type="text" placeholder="masukan kunci" required>
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-key"></i>
-                                </span>
+                    <div class="field">
+                        <label class="label">Kunci</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input" id="key" type="text" placeholder="masukan kunci" required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-key"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Mode</label>
+                        <div class="control">
+                            <div class="select">
+                                <select disabled>
+                                    <option>apa adanya</option>
+                                    <option>tanpa spasi</option>
+                                    <option>dalam kelompok 5-huruf</option>
+                                </select>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="field">
-                            <label class="label">Mode</label>
-                            <div class="control">
-                                <div class="select">
-                                    <select disabled>
-                                        <option>apa adanya</option>
-                                        <option>tanpa spasi</option>
-                                        <option>dalam kelompok 5-huruf</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                    <button class="button is-primary is-fullwidth is-rounded mt-5" id="proses"
+                        pys-onClick="proses">Proses</button>
 
-                        <button class="button is-primary is-fullwidth is-rounded mt-5" id="proses"
-                            pys-onClick="proses">Proses</button>
-
-                    </form>
                 </div>
 
                 <div class="column">
