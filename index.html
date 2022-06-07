@@ -15,6 +15,18 @@
 
     <py-script src="./vigenere.py"></py-script>
 
+    <section class="hero is-link">
+        <div class="hero-body">
+            <p class="title">
+                Sandi Vigenère
+            </p>
+            <p class="subtitle">
+                Metode menyandikan teks alfabet dengan menggunakan deretan sandi Caesar
+                berdasarkan huruf-huruf pada kata kunci.
+            </p>
+        </div>
+    </section>
+
     <section class="section">
         <div class="container">
             <div class="columns">
@@ -22,7 +34,7 @@
                 <div class="column">
                     <form class="box">
 
-                        <h1 class="title">Plainteks</h1>
+                        <h1 class="title" id="title_in">Plainteks</h1>
                         <h2 class="subtitle">input</h2>
 
                         <textarea class="textarea" id="input" placeholder="masukan pesan"></textarea>
@@ -51,7 +63,7 @@
 
                     <div class="tabs is-centered">
                         <ul>
-                            <li class="is-active">
+                            <li class="is-active" id="tab_enkripsi">
                                 <a>
                                     <span class="icon is-small">
                                         <i class="fas fa-lock" aria-hidden="true"></i>
@@ -59,7 +71,7 @@
                                     <span>Enkripsi</span>
                                 </a>
                             </li>
-                            <li>
+                            <li id="tab_dekripsi">
                                 <a>
                                     <span class="icon is-small">
                                         <i class="fas fa-lock-open" aria-hidden="true"></i>
@@ -73,20 +85,22 @@
                     <div class="field">
                         <label class="label">Jenis</label>
                         <div class="control">
-                            <div class="select">
+                            <div class="select is-rounded">
                                 <select disabled>
-                                    <option>Vigenere Cipher standard</option>
-                                    <option>Vigenere Cipher extended</option>
-                                    <option>Vigenere modifikasi</option>
+                                    <option>standard (26 huruf alfabet)</option>
+                                    <option>extended (256 karakter ASCII)</option>
+                                    <option>modifikasi ???</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
+                    <input type="text" id="choice" hidden>
+
                     <div class="field">
                         <label class="label">Kunci</label>
                         <div class="control has-icons-left has-icons-right">
-                            <input class="input" id="key" type="text" placeholder="masukan kunci" required>
+                            <input class="input is-rounded" id="key" type="text" placeholder="masukan kunci" required>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-key"></i>
                             </span>
@@ -96,11 +110,11 @@
                     <div class="field">
                         <label class="label">Mode</label>
                         <div class="control">
-                            <div class="select">
-                                <select disabled>
-                                    <option>apa adanya</option>
-                                    <option>tanpa spasi</option>
-                                    <option>dalam kelompok 5-huruf</option>
+                            <div class="select is-rounded">
+                                <select id="mode">
+                                    <option value="0">apa adanya</option>
+                                    <option value="1">tanpa spasi</option>
+                                    <option value="2">dalam kelompok 5-huruf</option>
                                 </select>
                             </div>
                         </div>
@@ -114,7 +128,7 @@
                 <div class="column">
                     <form class="box">
 
-                        <h1 class="title">Cipherteks</h1>
+                        <h1 class="title" id="title_out">Cipherteks</h1>
                         <h2 class="subtitle">output</h2>
 
                         <textarea class="textarea" id="output" readonly></textarea>
@@ -139,6 +153,18 @@
             </div>
         </div>
     </section>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                Alat enkripsi dan dekripsi <strong>Sandi Vigenère</strong> dibuat oleh <a
+                    href="https://github.com/luthfeew" target="_blank">Luthfi Wijaya</a> dan <a href="#">Ardan Ario
+                    Jati</a>.
+                <!-- Lisensi kode sumber
+                <a href="https://choosealicense.com/licenses/mit/" target="_blank">MIT</a>. -->
+            </p>
+        </div>
+    </footer>
 </body>
 
 </html>
