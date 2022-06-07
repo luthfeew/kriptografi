@@ -4,19 +4,141 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
+    <title>Vigenère cipher</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/8020a10438.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
+
+    <py-script src="./vigenere.py"></py-script>
+
     <section class="section">
         <div class="container">
-            <h1 class="title">
-                Hello World
-            </h1>
-            <p class="subtitle">
-                My first website with <strong>Bulma</strong>!
-            </p>
+            <div class="columns">
+
+                <div class="column">
+                    <form class="box">
+
+                        <h1 class="title">Plainteks</h1>
+                        <h2 class="subtitle">input</h2>
+
+                        <textarea class="textarea" id="input" placeholder="masukan pesan"></textarea>
+
+                        <!-- <div class="file is-primary has-name is-fullwidth mt-5">
+                            <label class="file-label">
+                                <input class="file-input is-rounded" type="file" name="resume">
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </span>
+                                    <span class="file-label">
+                                        Unggah file text
+                                    </span>
+                                </span>
+                                <span class="file-name">
+                                    ujicoba.txt
+                                </span>
+                            </label>
+                        </div> -->
+
+                    </form>
+                </div>
+
+                <div class="column is-3">
+                    <form class="box">
+
+                        <div class="tabs is-centered">
+                            <ul>
+                                <li class="is-active">
+                                    <a>
+                                        <span class="icon is-small">
+                                            <i class="fas fa-lock" aria-hidden="true"></i>
+                                        </span>
+                                        <span>Enkripsi</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="icon is-small">
+                                            <i class="fas fa-lock-open" aria-hidden="true"></i>
+                                        </span>
+                                        <span>Dekripsi</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Jenis</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select disabled>
+                                        <option>Vigenere Cipher standard</option>
+                                        <option>Vigenere Cipher extended</option>
+                                        <option>Vigenere modifikasi</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Kunci</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input" id="key" type="text" placeholder="masukan kunci" required>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-key"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Mode</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select disabled>
+                                        <option>apa adanya</option>
+                                        <option>tanpa spasi</option>
+                                        <option>dalam kelompok 5-huruf</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="button is-primary is-fullwidth is-rounded mt-5" id="proses"
+                            pys-onClick="proses">Proses</button>
+
+                    </form>
+                </div>
+
+                <div class="column">
+                    <form class="box">
+
+                        <h1 class="title">Cipherteks</h1>
+                        <h2 class="subtitle">output</h2>
+
+                        <textarea class="textarea" id="output" readonly></textarea>
+
+                        <!-- <div class="file is-primary is-centered mt-5">
+                            <label class="file-label">
+                                <input class="file-input" type="file" name="resume">
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-download"></i>
+                                    </span>
+                                    <span class="file-label">
+                                        Simpan text
+                                    </span>
+                                </span>
+                            </label>
+                        </div> -->
+
+                    </form>
+                </div>
+
+            </div>
         </div>
     </section>
 </body>
