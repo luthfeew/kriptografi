@@ -140,15 +140,15 @@ def proses(*args, **kwargs):
     inputan = input.value
     key0 = kunci.value
 
-    if not inputan:
-        input.element.classList.add('is-danger')
-        p_input.element.classList.add('help', 'is-danger')
-        p_input.element.innerHTML = 'Input tidak boleh kosong'
-        return
-    if not key0:
-        kunci.element.classList.add('is-danger')
-        p_kunci.element.classList.add('help', 'is-danger')
-        p_kunci.element.innerHTML = 'Kunci tidak boleh kosong'
+    if not inputan or not key0:
+        if not inputan:
+            input.element.classList.add('is-danger')
+            p_input.element.classList.add('help', 'is-danger')
+            p_input.element.innerHTML = 'Input tidak boleh kosong'
+        if not key0:
+            kunci.element.classList.add('is-danger')
+            p_kunci.element.classList.add('help', 'is-danger')
+            p_kunci.element.innerHTML = 'Kunci tidak boleh kosong'
         return
 
     num_key = []
