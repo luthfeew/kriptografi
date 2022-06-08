@@ -2,10 +2,13 @@ from pyodide import create_proxy
 from js import console, document, FileReader, window, encodeURIComponent
 
 input = Element('input')
+p_input = Element('p_input')
 file_upload = Element('upload')
 upload_name = Element('upload_name')
 choice = Element('choice')
+jenis = Element('jenis')
 kunci = Element('key')
+p_kunci = Element('p_key')
 mode = Element('mode')
 output = Element('output')
 title_in = Element('title_in')
@@ -15,8 +18,10 @@ t_dekripsi = Element('tab_dekripsi')
 
 
 def switch_input():
-    input.element.value = output.element.value
-    proses()
+    a = input.element.value
+    b = output.element.value
+    input.element.value = b
+    output.element.value = a
 
 
 def tab_enkripsi_click(e):
@@ -43,6 +48,18 @@ def tab_dekripsi_click(e):
         switch_input()
 
 
+def input_change(e):
+    input.element.classList.remove('is-danger')
+    p_input.element.classList.remove('help', 'is-danger')
+    p_input.element.innerHTML = ''
+
+
+def kunci_change(e):
+    kunci.element.classList.remove('is-danger')
+    p_kunci.element.classList.remove('help', 'is-danger')
+    p_kunci.element.innerHTML = ''
+
+
 def read_complete(e):
     input.element.value = e.target.result
 
@@ -65,17 +82,26 @@ def enkripsi(plaintext, num_key):
     for i in range(len(plaintext)):
         char0 = plaintext[i]
         char = char0.lower()
-        if char == " ":
-            ciphertext += ' '
-        elif char.isdigit():
-            ciphertext += char
-        elif char.isalpha():
-            if count < len(num_key):
-                key1 = num_key[count]
-                ciphertext += chr((ord(char) + key1 - 97) % 26 + 97)
-                count += 1
-            if count == len(num_key):
-                count = 0
+        match int(jenis.value):
+            case 0:
+                if char == " ":
+                    ciphertext += ' '
+                elif char.isdigit():
+                    ciphertext += char
+                elif char.isalpha():
+                    if count < len(num_key):
+                        key1 = num_key[count]
+                        ciphertext += chr((ord(char) + key1 - 97) % 26 + 97)
+                        count += 1
+                    if count == len(num_key):
+                        count = 0
+            case 1:
+                if count < len(num_key):
+                    key1 = num_key[count]
+                    ciphertext += chr((ord(char0) + key1) % 255)
+                    count += 1
+                if count == len(num_key):
+                    count = 0
 
     return ciphertext
 
@@ -86,17 +112,26 @@ def dekripsi(ciphertext, num_key):
     for i in range(len(ciphertext)):
         char0 = ciphertext[i]
         char = char0.lower()
-        if char == " ":
-            plaintext += ' '
-        elif char.isdigit():
-            plaintext += char
-        elif char.isalpha():
-            if count < len(num_key):
-                key1 = num_key[count]
-                plaintext += chr((ord(char) - key1 - 97) % 26 + 97)
-                count += 1
-            if count == len(num_key):
-                count = 0
+        match int(jenis.value):
+            case 0:
+                if char == " ":
+                    plaintext += ' '
+                elif char.isdigit():
+                    plaintext += char
+                elif char.isalpha():
+                    if count < len(num_key):
+                        key1 = num_key[count]
+                        plaintext += chr((ord(char) - key1 - 97) % 26 + 97)
+                        count += 1
+                    if count == len(num_key):
+                        count = 0
+            case 1:
+                if count < len(num_key):
+                    key1 = num_key[count]
+                    plaintext += chr((ord(char0) - key1) % 255)
+                    count += 1
+                if count == len(num_key):
+                    count = 0
 
     return plaintext
 
@@ -104,6 +139,17 @@ def dekripsi(ciphertext, num_key):
 def proses(*args, **kwargs):
     inputan = input.value
     key0 = kunci.value
+
+    if not inputan:
+        input.element.classList.add('is-danger')
+        p_input.element.classList.add('help', 'is-danger')
+        p_input.element.innerHTML = 'Input tidak boleh kosong'
+        return
+    if not key0:
+        kunci.element.classList.add('is-danger')
+        p_kunci.element.classList.add('help', 'is-danger')
+        p_kunci.element.innerHTML = 'Kunci tidak boleh kosong'
+        return
 
     num_key = []
 
@@ -151,6 +197,8 @@ def main():
         'click', create_proxy(tab_dekripsi_click))
     file_upload.element.addEventListener(
         'change', create_proxy(process_file))
+    input.element.addEventListener('input', create_proxy(input_change))
+    kunci.element.addEventListener('input', create_proxy(kunci_change))
 
 
 main()
