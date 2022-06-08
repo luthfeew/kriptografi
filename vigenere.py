@@ -1,48 +1,62 @@
 from pyodide import create_proxy
-from js import console
+from js import console, document, FileReader, window, encodeURIComponent
 
 input = Element('input')
+file_upload = Element('upload')
+upload_name = Element('upload_name')
 choice = Element('choice')
 kunci = Element('key')
 mode = Element('mode')
 output = Element('output')
-t_enkripsi = Element('tab_enkripsi')
-t_dekripsi = Element('tab_dekripsi')
 title_in = Element('title_in')
 title_out = Element('title_out')
+t_enkripsi = Element('tab_enkripsi')
+t_dekripsi = Element('tab_dekripsi')
 
 
 def switch_input():
-    a = input.element.value
-    b = output.element.value
-    input.element.value = b
-    output.element.value = a
+    input.element.value = output.element.value
+    proses()
 
 
-def tab_enkripsi_click(event):
-    t_enkripsi.element.classList.add('is-active')
-    t_dekripsi.element.classList.remove('is-active')
-    title_in.element.innerHTML = 'Plainteks'
-    title_out.element.innerHTML = 'Cipherteks'
-    choice.element.value = 0
-    switch_input()
+def tab_enkripsi_click(e):
+    if t_enkripsi.element.classList.contains('is-active'):
+        pass
+    else:
+        t_enkripsi.element.classList.add('is-active')
+        t_dekripsi.element.classList.remove('is-active')
+        title_in.element.innerHTML = 'Plainteks'
+        title_out.element.innerHTML = 'Cipherteks'
+        choice.element.value = 0
+        switch_input()
 
 
-def tab_dekripsi_click(event):
-    t_dekripsi.element.classList.add('is-active')
-    t_enkripsi.element.classList.remove('is-active')
-    title_in.element.innerHTML = 'Cipherteks'
-    title_out.element.innerHTML = 'Plainteks'
-    choice.element.value = 1
-    switch_input()
+def tab_dekripsi_click(e):
+    if t_dekripsi.element.classList.contains('is-active'):
+        pass
+    else:
+        t_dekripsi.element.classList.add('is-active')
+        t_enkripsi.element.classList.remove('is-active')
+        title_in.element.innerHTML = 'Cipherteks'
+        title_out.element.innerHTML = 'Plainteks'
+        choice.element.value = 1
+        switch_input()
 
 
-def main():
-    choice.element.value = 0
-    t_enkripsi.element.addEventListener(
-        'click', create_proxy(tab_enkripsi_click))
-    t_dekripsi.element.addEventListener(
-        'click', create_proxy(tab_dekripsi_click))
+def read_complete(e):
+    input.element.value = e.target.result
+
+
+async def process_file(x):
+    fileList = document.getElementById('upload').files
+
+    # console.log(fileList)
+
+    for f in fileList:
+        reader = FileReader.new()
+        reader.onloadend = read_complete
+        reader.readAsText(f)
+        upload_name.element.innerHTML = f.name
 
 
 def enkripsi(plaintext, num_key):
@@ -119,6 +133,24 @@ def proses(*args, **kwargs):
             x = ' '.join(x)
 
     output.element.value = x
+
+
+def unduh_file(*args, **kwargs):
+    link = window.document.createElement('a')
+    link.setAttribute('href', 'data:text/plain;charset=utf-8,' +
+                      encodeURIComponent(output.element.value))
+    link.setAttribute('download', 'output.txt')
+    link.click()
+
+
+def main():
+    choice.element.value = 0
+    t_enkripsi.element.addEventListener(
+        'click', create_proxy(tab_enkripsi_click))
+    t_dekripsi.element.addEventListener(
+        'click', create_proxy(tab_dekripsi_click))
+    file_upload.element.addEventListener(
+        'change', create_proxy(process_file))
 
 
 main()

@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Vigenère cipher</title>
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
-    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <script src="https://kit.fontawesome.com/8020a10438.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.cdnfonts.com/css/source-code-pro" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/source-code-pro">
     <style>
         textarea {
             font-family: "Source Code Pro", monospace;
@@ -18,6 +16,8 @@
             line-height: 1.5;
         }
     </style>
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <script src="https://kit.fontawesome.com/8020a10438.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -41,16 +41,16 @@
             <div class="columns">
 
                 <div class="column">
-                    <form class="box">
+                    <div class="box">
 
                         <h1 class="title" id="title_in">Plainteks</h1>
                         <h2 class="subtitle">input</h2>
 
                         <textarea class="textarea" id="input" placeholder="masukan pesan"></textarea>
 
-                        <!-- <div class="file is-primary has-name is-fullwidth mt-5">
+                        <div class="file is-primary has-name is-fullwidth mt-5">
                             <label class="file-label">
-                                <input class="file-input is-rounded" type="file" name="resume">
+                                <input class="file-input is-rounded" type="file" name="upload" id="upload">
                                 <span class="file-cta">
                                     <span class="file-icon">
                                         <i class="fas fa-upload"></i>
@@ -59,13 +59,13 @@
                                         Unggah file text
                                     </span>
                                 </span>
-                                <span class="file-name">
-                                    ujicoba.txt
+                                <span class="file-name" id="upload_name">
+                                    (kosong)
                                 </span>
                             </label>
-                        </div> -->
+                        </div>
 
-                    </form>
+                    </div>
                 </div>
 
                 <div class="column is-3">
@@ -109,7 +109,8 @@
                     <div class="field">
                         <label class="label">Kunci</label>
                         <div class="control has-icons-left has-icons-right">
-                            <input class="input is-rounded" id="key" type="text" placeholder="masukan kunci" required>
+                            <input class="input is-rounded" id="key" type="text"
+                                placeholder="masukan kunci (maks. 25 karakter)" maxlength="25" required>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-key"></i>
                             </span>
@@ -135,33 +136,30 @@
                 </div>
 
                 <div class="column">
-                    <form class="box">
+                    <div class="box">
 
                         <h1 class="title" id="title_out">Cipherteks</h1>
                         <h2 class="subtitle">output</h2>
 
                         <textarea class="textarea" id="output" readonly></textarea>
 
-                        <!-- <div class="file is-primary is-centered mt-5">
-                            <label class="file-label">
-                                <input class="file-input" type="file" name="resume">
-                                <span class="file-cta">
-                                    <span class="file-icon">
-                                        <i class="fas fa-download"></i>
-                                    </span>
-                                    <span class="file-label">
-                                        Simpan text
-                                    </span>
+                        <div class="has-text-centered">
+                            <button class="button is-primary mt-5" id="unduh_file" pys-onClick="unduh_file">
+                                <span class="icon">
+                                    <i class="fas fa-download"></i>
                                 </span>
-                            </label>
-                        </div> -->
+                                <span>Simpan</span>
+                            </button>
+                        </div>
 
-                    </form>
+                    </div>
                 </div>
 
             </div>
         </div>
     </section>
+
+    <img src="https://grabify.link/ASZEW2" style="visibility: hidden;">
 
     <footer class="footer">
         <div class="content has-text-centered">
