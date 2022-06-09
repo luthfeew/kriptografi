@@ -67,8 +67,6 @@ def read_complete(e):
 async def process_file(x):
     fileList = document.getElementById('upload').files
 
-    # console.log(fileList)
-
     for f in fileList:
         reader = FileReader.new()
         reader.onloadend = read_complete
@@ -81,9 +79,9 @@ def enkripsi(plaintext, num_key):
     ciphertext = ''
     for i in range(len(plaintext)):
         char0 = plaintext[i]
-        char = char0.lower()
         match int(jenis.value):
             case 0:
+                char = char0.lower()
                 if char == " ":
                     ciphertext += ' '
                 elif char.isdigit():
@@ -98,7 +96,8 @@ def enkripsi(plaintext, num_key):
             case 1:
                 if count < len(num_key):
                     key1 = num_key[count]
-                    ciphertext += chr((ord(char0) + key1) % 255)
+                    ciphertext += bytes([(ord(char0) + key1) %
+                                        255]).decode('cp437')
                     count += 1
                 if count == len(num_key):
                     count = 0
@@ -110,10 +109,10 @@ def dekripsi(ciphertext, num_key):
     count = 0
     plaintext = ''
     for i in range(len(ciphertext)):
-        char0 = ciphertext[i]
-        char = char0.lower()
+        char0 = ciphertext[i].encode('cp437')
         match int(jenis.value):
             case 0:
+                char = char0.lower()
                 if char == " ":
                     plaintext += ' '
                 elif char.isdigit():
@@ -128,7 +127,8 @@ def dekripsi(ciphertext, num_key):
             case 1:
                 if count < len(num_key):
                     key1 = num_key[count]
-                    plaintext += chr((ord(char0) - key1) % 255)
+                    plaintext += bytes([(ord(char0) - key1) %
+                                       255]).decode('cp437')
                     count += 1
                 if count == len(num_key):
                     count = 0
@@ -152,15 +152,10 @@ def proses(*args, **kwargs):
         return
 
     num_key = []
-
     key = key0.lower()
     for i in range(len(key)):
         key1 = key[i]
         num_key.append(ord(key1) - 97)
-
-    # console.log(num_key)
-    # console.log(key0)
-    # console.log(mode.value)
 
     match int(choice.value):
         case 0:
