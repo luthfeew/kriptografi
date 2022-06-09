@@ -109,7 +109,7 @@ def dekripsi(ciphertext, num_key):
     count = 0
     plaintext = ''
     for i in range(len(ciphertext)):
-        char0 = ciphertext[i].encode('cp437')
+        char0 = ciphertext[i]
         match int(jenis.value):
             case 0:
                 char = char0.lower()
@@ -127,7 +127,7 @@ def dekripsi(ciphertext, num_key):
             case 1:
                 if count < len(num_key):
                     key1 = num_key[count]
-                    plaintext += bytes([(ord(char0) - key1) %
+                    plaintext += bytes([(ord(char0.encode('cp437')) - key1) %
                                        256]).decode('cp437')
                     count += 1
                 if count == len(num_key):
