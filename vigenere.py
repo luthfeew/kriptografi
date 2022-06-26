@@ -81,19 +81,6 @@ def enkripsi(plaintext, num_key):
     for i in range(len(plaintext)):
         char0 = plaintext[i]
         match int(jenis.value):
-            case 0:
-                char = char0.lower()
-                if char == " ":
-                    ciphertext += ' '
-                elif char.isdigit():
-                    ciphertext += char
-                elif char.isalpha():
-                    if count < len(num_key):
-                        key1 = num_key[count]
-                        ciphertext += chr((ord(char) + key1 - 97) % 26 + 97)
-                        count += 1
-                    if count == len(num_key):
-                        count = 0
             case 1:
                 if count < len(num_key):
                     key1 = num_key[count]
@@ -102,6 +89,25 @@ def enkripsi(plaintext, num_key):
                     count += 1
                 if count == len(num_key):
                     count = 0
+            case _:
+                char = char0.lower()
+                if char == " ":
+                    ciphertext += ' '
+                elif char.isdigit():
+                    ciphertext += char
+                elif char.isalpha():
+                    if count < len(num_key):
+                        key1 = num_key[count]
+                        match int(jenis.value):
+                            case 0:
+                                ciphertext += chr((ord(char) +
+                                                  key1 - 97) % 26 + 97)
+                            case 2:
+                                ciphertext += chr((key1 -
+                                                  ord(char) + 97 % 26) % 26 + 97)
+                        count += 1
+                    if count == len(num_key):
+                        count = 0
 
     if int(jenis.value) == 1:
         ciphertext = base64.b64encode(
@@ -113,25 +119,13 @@ def enkripsi(plaintext, num_key):
 def dekripsi(ciphertext, num_key):
     count = 0
     plaintext = ''
+
     if int(jenis.value) == 1:
         ciphertext = base64.b64decode(ciphertext).decode('utf-8')
 
     for i in range(len(ciphertext)):
         char0 = ciphertext[i]
         match int(jenis.value):
-            case 0:
-                char = char0.lower()
-                if char == " ":
-                    plaintext += ' '
-                elif char.isdigit():
-                    plaintext += char
-                elif char.isalpha():
-                    if count < len(num_key):
-                        key1 = num_key[count]
-                        plaintext += chr((ord(char) - key1 - 97) % 26 + 97)
-                        count += 1
-                    if count == len(num_key):
-                        count = 0
             case 1:
                 if count < len(num_key):
                     key1 = num_key[count]
@@ -140,6 +134,25 @@ def dekripsi(ciphertext, num_key):
                     count += 1
                 if count == len(num_key):
                     count = 0
+            case _:
+                char = char0.lower()
+                if char == " ":
+                    plaintext += ' '
+                elif char.isdigit():
+                    plaintext += char
+                elif char.isalpha():
+                    if count < len(num_key):
+                        key1 = num_key[count]
+                        match int(jenis.value):
+                            case 0:
+                                plaintext += chr((ord(char) -
+                                                 key1 - 97) % 26 + 97)
+                            case 2:
+                                plaintext += chr((key1 -
+                                                  ord(char) + 97 % 26) % 26 + 97)
+                        count += 1
+                    if count == len(num_key):
+                        count = 0
 
     return plaintext
 
