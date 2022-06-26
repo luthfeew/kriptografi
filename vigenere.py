@@ -1,3 +1,4 @@
+import base64
 from pyodide import create_proxy
 from js import console, document, FileReader, window, encodeURIComponent
 
@@ -102,12 +103,19 @@ def enkripsi(plaintext, num_key):
                 if count == len(num_key):
                     count = 0
 
+    if int(jenis.value) == 1:
+        ciphertext = base64.b64encode(
+            ciphertext.encode('utf-8')).decode('utf-8')
+
     return ciphertext
 
 
 def dekripsi(ciphertext, num_key):
     count = 0
     plaintext = ''
+    if int(jenis.value) == 1:
+        ciphertext = base64.b64decode(ciphertext).decode('utf-8')
+
     for i in range(len(ciphertext)):
         char0 = ciphertext[i]
         match int(jenis.value):
