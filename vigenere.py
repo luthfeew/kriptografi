@@ -97,7 +97,7 @@ def enkripsi(plaintext, num_key):
             case 1:
                 if count < len(num_key):
                     key1 = num_key[count]
-                    ciphertext += bytes([(ord(char0) + key1) % 256]).decode("cp437")
+                    ciphertext += bytes([(ord(char0) + key1) % 256]).decode("latin-1")
                     count += 1
                 if count == len(num_key):
                     count = 0
@@ -144,8 +144,8 @@ def dekripsi(ciphertext, num_key):
                 if count < len(num_key):
                     key1 = num_key[count]
                     plaintext += bytes(
-                        [(ord(char0.encode("cp437")) - key1) % 256]
-                    ).decode("cp437")
+                        [(ord(char0.encode("latin-1")) - key1) % 256]
+                    ).decode("latin-1")
                     count += 1
                 if count == len(num_key):
                     count = 0
