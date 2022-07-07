@@ -26,9 +26,7 @@ def switch_input():
 
 
 def tab_enkripsi_click(e):
-    if t_enkripsi.element.classList.contains("is-active"):
-        pass
-    else:
+    if not t_enkripsi.element.classList.contains("is-active"):
         t_enkripsi.element.classList.add("is-active")
         t_dekripsi.element.classList.remove("is-active")
         title_in.element.innerHTML = "Plainteks"
@@ -38,9 +36,7 @@ def tab_enkripsi_click(e):
 
 
 def tab_dekripsi_click(e):
-    if t_dekripsi.element.classList.contains("is-active"):
-        pass
-    else:
+    if not t_dekripsi.element.classList.contains("is-active"):
         t_dekripsi.element.classList.add("is-active")
         t_enkripsi.element.classList.remove("is-active")
         title_in.element.innerHTML = "Cipherteks"
@@ -124,7 +120,7 @@ def enkripsi(plaintext, num_key):
                         count = 0
 
     if int(jenis.value) == 1:
-        ciphertext = base64.b64encode(ciphertext.encode("utf-8")).decode("utf-8")
+        ciphertext = base64.a85encode(ciphertext.encode("utf-8")).decode("utf-8")
 
     return ciphertext
 
@@ -134,7 +130,7 @@ def dekripsi(ciphertext, num_key):
     plaintext = ""
 
     if int(jenis.value) == 1:
-        ciphertext = base64.b64decode(ciphertext).decode("utf-8")
+        ciphertext = base64.a85decode(ciphertext).decode("utf-8")
 
     for i in range(len(ciphertext)):
         char0 = ciphertext[i]
