@@ -33,4 +33,5 @@ Aplikasi yang kami bangun adalah aplikasi berbasis web. Adapun teknologi yang ka
 ![image](https://user-images.githubusercontent.com/46989920/175885288-e5a39ba5-652a-46db-9baf-4eb23fbe9d45.png)
 
 ### Contoh Penggunaan
-![image](https://user-images.githubusercontent.com/46989920/175885906-8bffe1e6-fe60-4db5-8e94-da25b58c0a79.png)
+![image](https://user-images.githubusercontent.com/46989920/177716252-154ccdbe-9384-46b6-8213-95bc60b2f591.png)
+
