@@ -8,11 +8,6 @@ Repository ini merupakan repository untuk Tugas Mata Kuliah Kriptografi Semester
 
 Aplikasi yang kami bangun adalah aplikasi berbasis web. Adapun teknologi yang kami gunakan untuk membangun aplikasi ini adalah bahasa Python dengan menggunakan *framework* [PyScript](https://pyscript.net/).
 
-## Anggota Kelompok
-
-- Ardan Ario Jati   - 19SA1127
-- Luthfi Wijaya     - 19SA1198
-
 ## Demo Aplikasi
 
 [luthfeew.github.io/kriptografi](https://luthfeew.github.io/kriptografi/)
